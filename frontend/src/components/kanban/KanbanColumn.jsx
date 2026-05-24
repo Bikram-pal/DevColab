@@ -1,13 +1,19 @@
-import { MoreHorizontal } from 'lucide-react';
+import { useDroppable } from '@dnd-kit/core';
+import { MoreHorizontal, Plus } from 'lucide-react';
 import { TaskCard } from './TaskCard';
 import { cn } from '../../assets/utils';
 
-export const KanbanColumn = ({ title, tasks, onAddTask, onTaskClick, users }) => {
+export const KanbanColumn = ({ status, title, tasks, onAddTask, onTaskClick, users, isLoading = false }) => {
+    const { setNodeRef, isOver } = useDroppable({
+        id: status,
+        data: { type: 'column', status },
+    });
+
     return (
-        <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
+        <div className="flex min-w-0 flex-col gap-4">
             <div className={cn(
-                "flex items-center justify-between p-2 border-t-2",
-                title === 'To Do' ? "border-gray-500" : title === 'In Progress' ? "border-info" : title === 'In Review' ? "border-warning" : "border-success"
+                'flex items-center justify-between border-t-2 px-2 pt-2',
+                title === 'To Do' ? 'border-gray-500' : title === 'In Progress' ? 'border-info' : title === 'In Review' ? 'border-warning' : 'border-success'
             )}>
                 <div className="flex items-center gap-2">
                     <h3 className="font-bold text-sm">{title}</h3>
@@ -16,20 +22,36 @@ export const KanbanColumn = ({ title, tasks, onAddTask, onTaskClick, users }) =>
                 <button className="text-gray-500 hover:text-white"><MoreHorizontal size={14} /></button>
             </div>
 
-            <div className="flex-1 space-y-3 bg-black/10 dark:bg-white/1 rounded-lg p-1">
-                {tasks.map(task => (
-                    <TaskCard 
-                        key={task.id} 
-                        task={task} 
-                        onClick={() => onTaskClick(task)} 
-                        assignee={users.find(u => u.id === task.assignee)}
-                    />
-                ))}
-                <button 
+            <div
+                ref={setNodeRef}
+                className={cn(
+                    'flex min-h-65 flex-1 flex-col gap-3 rounded-2xl border border-dark-border/60 bg-black/10 p-2 transition-colors dark:bg-white/1',
+                    isOver && 'border-primary/70 bg-primary/5',
+                )}
+            >
+                {isLoading ? (
+                    <div className="space-y-3 p-1">
+                        <div className="h-28 animate-pulse rounded-xl bg-white/5" />
+                        <div className="h-24 animate-pulse rounded-xl bg-white/5" />
+                        <div className="h-20 animate-pulse rounded-xl bg-white/5" />
+                    </div>
+                ) : (
+                    tasks.map((task) => (
+                        <TaskCard
+                            key={task.id}
+                            task={task}
+                            onClick={() => onTaskClick(task)}
+                            assignee={users.find((u) => u.id === task.assignee)}
+                            disabled={task.pending}
+                        />
+                    ))
+                )}
+                <button
+                    type="button"
                     onClick={onAddTask}
-                    className="w-full py-2 border border-dashed border-dark-border rounded-lg text-xs text-gray-500 hover:border-primary hover:text-primary transition-all"
+                    className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-dark-border px-3 py-2 text-xs text-gray-500 transition-all hover:border-primary hover:text-primary"
                 >
-                    + Add Task
+                    <Plus size={14} /> Add Task
                 </button>
             </div>
         </div>

@@ -48,7 +48,17 @@ export const updateWorkspace = asyncHandler(async (req, res) => {
   ['name', 'avatar'].forEach((key) => { if (req.body[key] !== undefined) update[key] = req.body[key]; });
   if (req.body.slug) update.slug = slugify(req.body.slug);
   const workspace = await Workspace.findByIdAndUpdate(req.params.workspaceId, update, { new: true });
+  if (!workspace) return fail(res, 'Workspace not found', 404);
   await logActivity({ userId: req.user.id, workspaceId: workspace._id, action: 'workspace.updated', entityType: 'project', entityId: workspace._id, entityName: workspace.name });
+  return ok(res, { workspace });
+});
+
+export const upgradeWorkspace = asyncHandler(async (req, res) => {
+  const workspace = await Workspace.findById(req.params.workspaceId);
+  if (!workspace) return fail(res, 'Workspace not found', 404);
+  workspace.plan = 'pro';
+  await workspace.save();
+  await logActivity({ userId: req.user.id, workspaceId: workspace._id, action: 'workspace.updated', entityType: 'project', entityId: workspace._id, entityName: `${workspace.name} upgraded to Pro` });
   return ok(res, { workspace });
 });
 

@@ -1,7 +1,21 @@
-import { Badge, Avatar } from "../ui";
-import { Paperclip, MessageSquare, MoreHorizontal } from "lucide-react";
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+import { Badge, Avatar } from '../ui';
+import { GripVertical, Paperclip, MessageSquare, MoreHorizontal } from 'lucide-react';
+import { cn } from '../../assets/utils';
 
-export const TaskCard = ({ task, onClick, assignee }) => {
+export const TaskCard = ({ task, onClick, assignee, disabled = false }) => {
+  const taskId = task.id || task._id;
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useDraggable({
+    id: taskId,
+    data: { type: 'task', task, status: task.status },
+    disabled,
+  });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
   const getPriorityBadge = (p) => {
     if (p === "P0")
       return (
@@ -33,13 +47,29 @@ export const TaskCard = ({ task, onClick, assignee }) => {
 
   return (
     <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
       onClick={onClick}
-      className="surface p-4 rounded-xl space-y-4 hover:translate-y-[-2px] transition-all cursor-pointer group shadow-sm border dark:border-dark-border/50"
+      className={cn(
+        'surface p-4 rounded-xl space-y-4 hover:-translate-y-0.5 transition-all cursor-pointer group shadow-sm border dark:border-dark-border/50 will-change-transform',
+        isDragging && 'opacity-60 scale-[0.98] shadow-xl ring-1 ring-primary/40',
+        task.pending && 'opacity-70',
+      )}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         {getPriorityBadge(task.priority)}
-        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button className="text-gray-500 hover:text-white">
+        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            type="button"
+            {...listeners}
+            onClick={(event) => event.stopPropagation()}
+            className="text-gray-500 hover:text-white cursor-grab active:cursor-grabbing"
+            aria-label={`Drag ${task.title}`}
+          >
+            <GripVertical size={14} />
+          </button>
+          <button type="button" onClick={(event) => event.stopPropagation()} className="text-gray-500 hover:text-white">
             <MoreHorizontal size={14} />
           </button>
         </div>
@@ -48,7 +78,7 @@ export const TaskCard = ({ task, onClick, assignee }) => {
         {task.title}
       </h4>
       <div className="flex flex-wrap gap-1">
-        {task.labels.map((l) => (
+        {(task.labels || []).map((l) => (
           <span
             key={l}
             className="text-[10px] text-gray-500 bg-dark-border px-1.5 py-0.5 rounded font-medium"
@@ -65,7 +95,7 @@ export const TaskCard = ({ task, onClick, assignee }) => {
             </span>
           )}
           <span className="text-[10px] flex items-center gap-1">
-            <MessageSquare size={10} /> 4
+            <MessageSquare size={10} /> {task.comments?.length || 0}
           </span>
         </div>
         <Avatar src={assignee?.avatar} name={assignee?.name} size="xs" />

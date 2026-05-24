@@ -60,3 +60,40 @@ export const listVersions = asyncHandler(async (req, res) => {
   if (!page) return fail(res, 'Wiki page not found', 404);
   return ok(res, { versions: page.versionHistory });
 });
+
+export const restoreVersion = asyncHandler(async (req, res) => {
+  const page = await WikiPage.findById(req.params.pageId);
+  if (!page) return fail(res, 'Wiki page not found', 404);
+
+  const { versionId, versionIndex } = req.body;
+  const index = versionId
+    ? page.versionHistory.findIndex((version) => version._id.toString() === versionId)
+    : Number.isInteger(versionIndex)
+      ? versionIndex
+      : Number.parseInt(versionIndex, 10);
+
+  if (!Number.isInteger(index) || index < 0 || index >= page.versionHistory.length) {
+    return fail(res, 'Version not found', 404);
+  }
+
+  const version = page.versionHistory[index];
+  page.versionHistory.push({ content: page.content, editedBy: req.user.id });
+  page.content = version.content || '';
+  await page.save();
+
+  const project = await Project.findById(page.projectId);
+  if (project) {
+    await logActivity({
+      userId: req.user.id,
+      workspaceId: project.workspaceId,
+      projectId: project._id,
+      action: 'doc.restored',
+      entityType: 'wiki',
+      entityId: page._id,
+      entityName: page.title,
+      metadata: { versionId: version._id, versionIndex: index },
+    });
+  }
+
+  return ok(res, { page });
+});

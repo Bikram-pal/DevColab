@@ -1,0 +1,261 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 3638 >>
+stream
+BT
+/F1 20 Tf
+1 0 0 1 50 740 Tm (DEVCOLLAB OVERVIEW) Tj
+/F1 14 Tf
+1 0 0 1 50 714 Tm (WHAT DEVCOLLAB IS) Tj
+/F1 11 Tf
+1 0 0 1 50 702 Tm (DevCollab is a collaborative project workspace app for teams. It combines authentication,) Tj
+/F1 11 Tf
+1 0 0 1 50 687 Tm (workspace management, project boards, task tracking, wiki pages, code snippets, activity) Tj
+/F1 11 Tf
+1 0 0 1 50 672 Tm (history, notifications, invites, and AI-assisted workflows in a single full-stack product.) Tj
+/F1 14 Tf
+1 0 0 1 50 649 Tm (HIGH-LEVEL ARCHITECTURE) Tj
+/F1 11 Tf
+1 0 0 1 50 637 Tm (-  Backend: Node.js, Express, MongoDB, Socket.IO.) Tj
+/F1 11 Tf
+1 0 0 1 50 622 Tm (-  Frontend: React, Vite, Tailwind CSS, React Router, Socket.IO client.) Tj
+/F1 11 Tf
+1 0 0 1 50 607 Tm (-  Shared pattern: REST APIs for persistence plus real-time socket events for) Tj
+/F1 11 Tf
+1 0 0 1 50 592 Tm (  collaboration.) Tj
+/F1 11 Tf
+1 0 0 1 50 569 Tm (The backend boots an Express app, connects to MongoDB, exposes REST endpoints under `/api`,) Tj
+/F1 11 Tf
+1 0 0 1 50 554 Tm (serves uploads, and registers Socket.IO namespaces for live board, presence, and) Tj
+/F1 11 Tf
+1 0 0 1 50 539 Tm (notification events.) Tj
+/F1 11 Tf
+1 0 0 1 50 516 Tm (The frontend uses route guards for authentication and workspace onboarding, then renders) Tj
+/F1 11 Tf
+1 0 0 1 50 501 Tm (feature pages for the dashboard, kanban board, snippets, wiki, activity, AI, settings, and) Tj
+/F1 11 Tf
+1 0 0 1 50 486 Tm (pricing.) Tj
+/F1 14 Tf
+1 0 0 1 50 463 Tm (BACKEND BREAKDOWN) Tj
+/F1 12 Tf
+1 0 0 1 50 451 Tm (CORE ENTRY POINTS) Tj
+/F1 11 Tf
+1 0 0 1 50 445 Tm (-  `backend/server.js`: Express + HTTP server + Socket.IO bootstrap.) Tj
+/F1 11 Tf
+1 0 0 1 50 430 Tm (-  `backend/config/db.js`: database connection.) Tj
+/F1 11 Tf
+1 0 0 1 50 415 Tm (-  `backend/config/socket.js`: Socket.IO instance management and helpers for emitting) Tj
+/F1 11 Tf
+1 0 0 1 50 400 Tm (  into projects, workspaces, and users.) Tj
+/F1 12 Tf
+1 0 0 1 50 377 Tm (API SURFACE) Tj
+/F1 11 Tf
+1 0 0 1 50 371 Tm (-  `auth.routes.js`: authentication flows.) Tj
+/F1 11 Tf
+1 0 0 1 50 356 Tm (-  `user.routes.js`: user profile and account access.) Tj
+/F1 11 Tf
+1 0 0 1 50 341 Tm (-  `workspace.routes.js`: workspace creation and management.) Tj
+/F1 11 Tf
+1 0 0 1 50 326 Tm (-  `project.routes.js`: project-level operations.) Tj
+/F1 11 Tf
+1 0 0 1 50 311 Tm (-  `task.routes.js`: task CRUD, move, comments, and attachments.) Tj
+/F1 11 Tf
+1 0 0 1 50 296 Tm (-  `snippet.routes.js`: code snippet storage and retrieval.) Tj
+/F1 11 Tf
+1 0 0 1 50 281 Tm (-  `wiki.routes.js`: collaborative wiki pages.) Tj
+/F1 11 Tf
+1 0 0 1 50 266 Tm (-  `activity.routes.js`: activity timeline.) Tj
+/F1 11 Tf
+1 0 0 1 50 251 Tm (-  `notification.routes.js`: notifications.) Tj
+/F1 11 Tf
+1 0 0 1 50 236 Tm (-  `invite.routes.js`: workspace or project invites.) Tj
+/F1 11 Tf
+1 0 0 1 50 221 Tm (-  `ai.routes.js`: AI-related actions.) Tj
+/F1 12 Tf
+1 0 0 1 50 198 Tm (BACKEND FEATURES) Tj
+/F1 11 Tf
+1 0 0 1 50 192 Tm (-  Authentication and authorization middleware.) Tj
+/F1 11 Tf
+1 0 0 1 50 177 Tm (-  Role-based access control for members, viewers, and admins.) Tj
+/F1 11 Tf
+1 0 0 1 50 162 Tm (-  File upload support through Multer.) Tj
+/F1 11 Tf
+1 0 0 1 50 147 Tm (-  Activity logging and notifications.) Tj
+/F1 11 Tf
+1 0 0 1 50 132 Tm (-  Comment mentions and task assignment notifications.) Tj
+/F1 11 Tf
+1 0 0 1 50 117 Tm (-  Real-time board broadcasts for task create, update, move, delete, and comment) Tj
+/F1 11 Tf
+1 0 0 1 50 102 Tm (  activity.) Tj
+/F1 12 Tf
+1 0 0 1 50 79 Tm (DATA MODELS) Tj
+/F1 11 Tf
+1 0 0 1 50 73 Tm (-  `User`, `Workspace`, `Project`.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 3502 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 740 Tm (-  `Task`, `Snippet`, `WikiPage`.) Tj
+/F1 11 Tf
+1 0 0 1 50 725 Tm (-  `Invite`, `Notification`, `ActivityLog`.) Tj
+/F1 14 Tf
+1 0 0 1 50 702 Tm (FRONTEND BREAKDOWN) Tj
+/F1 12 Tf
+1 0 0 1 50 690 Tm (APP STRUCTURE) Tj
+/F1 11 Tf
+1 0 0 1 50 684 Tm (-  `src/main.jsx`: React root.) Tj
+/F1 11 Tf
+1 0 0 1 50 669 Tm (-  `src/App.jsx`: route definitions and context providers.) Tj
+/F1 11 Tf
+1 0 0 1 50 654 Tm (-  `src/context/*`: auth, theme, and workspace state.) Tj
+/F1 11 Tf
+1 0 0 1 50 639 Tm (-  `src/lib/api.js`: Axios client with auth headers and response handling.) Tj
+/F1 11 Tf
+1 0 0 1 50 624 Tm (-  `src/lib/socket.js`: Socket.IO client instances for board, presence, and) Tj
+/F1 11 Tf
+1 0 0 1 50 609 Tm (  notifications.) Tj
+/F1 12 Tf
+1 0 0 1 50 586 Tm (MAIN ROUTES) Tj
+/F1 11 Tf
+1 0 0 1 50 580 Tm (-  `/login`, `/signup`: authentication.) Tj
+/F1 11 Tf
+1 0 0 1 50 565 Tm (-  `/onboarding/workspace`: initial workspace setup.) Tj
+/F1 11 Tf
+1 0 0 1 50 550 Tm (-  `/dashboard`: workspace overview.) Tj
+/F1 11 Tf
+1 0 0 1 50 535 Tm (-  `/project/:id/board`: kanban board.) Tj
+/F1 11 Tf
+1 0 0 1 50 520 Tm (-  `/project/:id/snippets`: snippets.) Tj
+/F1 11 Tf
+1 0 0 1 50 505 Tm (-  `/project/:id/wiki`: wiki.) Tj
+/F1 11 Tf
+1 0 0 1 50 490 Tm (-  `/project/:id/activity`: activity feed.) Tj
+/F1 11 Tf
+1 0 0 1 50 475 Tm (-  `/project/:id/ai`: AI page.) Tj
+/F1 11 Tf
+1 0 0 1 50 460 Tm (-  `/settings/workspace`, `/settings/profile`: settings.) Tj
+/F1 11 Tf
+1 0 0 1 50 445 Tm (-  `/upgrade`: pricing and upgrade page.) Tj
+/F1 12 Tf
+1 0 0 1 50 422 Tm (FRONTEND FEATURE AREAS) Tj
+/F1 11 Tf
+1 0 0 1 50 416 Tm (-  Layout primitives in `components/layout`.) Tj
+/F1 11 Tf
+1 0 0 1 50 401 Tm (-  Kanban UI in `components/kanban`.) Tj
+/F1 11 Tf
+1 0 0 1 50 386 Tm (-  Shared UI primitives in `components/ui`.) Tj
+/F1 11 Tf
+1 0 0 1 50 371 Tm (-  Page-level feature screens in `pages/`.) Tj
+/F1 14 Tf
+1 0 0 1 50 348 Tm (REAL-TIME COLLABORATION) Tj
+/F1 11 Tf
+1 0 0 1 50 336 Tm (DevCollab uses Socket.IO for live collaboration.) Tj
+/F1 11 Tf
+1 0 0 1 50 313 Tm (-  Board namespace: task updates are broadcast per project.) Tj
+/F1 11 Tf
+1 0 0 1 50 298 Tm (-  Presence namespace: viewer and presence state is shared in real time.) Tj
+/F1 11 Tf
+1 0 0 1 50 283 Tm (-  Notification namespace: user notifications can be pushed instantly.) Tj
+/F1 11 Tf
+1 0 0 1 50 260 Tm (The kanban board now supports drag-and-drop with optimistic updates, local state) Tj
+/F1 11 Tf
+1 0 0 1 50 245 Tm (reconciliation, and socket cleanup so repeated events do not duplicate tasks.) Tj
+/F1 14 Tf
+1 0 0 1 50 222 Tm (KANBAN BOARD BEHAVIOR) Tj
+/F1 11 Tf
+1 0 0 1 50 210 Tm (-  Tasks are grouped by status: todo, in_progress, in_review, done.) Tj
+/F1 11 Tf
+1 0 0 1 50 195 Tm (-  Moving a task updates the UI immediately and then syncs to the backend.) Tj
+/F1 11 Tf
+1 0 0 1 50 180 Tm (-  Task details are shown in a sidebar with live comment updates.) Tj
+/F1 11 Tf
+1 0 0 1 50 165 Tm (-  The board is responsive for smaller screens and uses loading skeletons while data is) Tj
+/F1 11 Tf
+1 0 0 1 50 150 Tm (  loading.) Tj
+/F1 11 Tf
+1 0 0 1 50 135 Tm (-  Drag-and-drop uses `@dnd-kit/core` and `@dnd-kit/utilities`.) Tj
+/F1 14 Tf
+1 0 0 1 50 112 Tm (RUNTIME FLOW) Tj
+/F1 11 Tf
+1 0 0 1 50 100 Tm (1. The frontend loads the authenticated app shell.) Tj
+/F1 11 Tf
+1 0 0 1 50 85 Tm (2. The workspace gate redirects users who still need onboarding.) Tj
+/F1 11 Tf
+1 0 0 1 50 70 Tm (3. The kanban page fetches tasks grouped by status.) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 1243 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 740 Tm (4. Socket listeners join the board and presence rooms.) Tj
+/F1 11 Tf
+1 0 0 1 50 725 Tm (5. Local changes are applied optimistically.) Tj
+/F1 11 Tf
+1 0 0 1 50 710 Tm (6. Backend persistence and socket broadcasts keep other clients in sync.) Tj
+/F1 14 Tf
+1 0 0 1 50 687 Tm (ENVIRONMENT NOTES) Tj
+/F1 11 Tf
+1 0 0 1 50 675 Tm (-  Backend dev command: `npm run dev` from `backend/`.) Tj
+/F1 11 Tf
+1 0 0 1 50 660 Tm (-  Frontend dev command: `npm run dev` from `frontend/`.) Tj
+/F1 11 Tf
+1 0 0 1 50 645 Tm (-  Frontend production build currently succeeds.) Tj
+/F1 11 Tf
+1 0 0 1 50 630 Tm (-  Key env variables used by the codebase include `CLIENT_URL`, `PORT`, `VITE_API_URL`,) Tj
+/F1 11 Tf
+1 0 0 1 50 615 Tm (  and `VITE_SOCKET_URL`.) Tj
+/F1 14 Tf
+1 0 0 1 50 592 Tm (CURRENT IMPLEMENTATION FOCUS) Tj
+/F1 11 Tf
+1 0 0 1 50 580 Tm (The current codebase is centered on team collaboration, task execution, and live multi-user) Tj
+/F1 11 Tf
+1 0 0 1 50 565 Tm (synchronization. The most important product surfaces are the kanban board, workspaces,) Tj
+/F1 11 Tf
+1 0 0 1 50 550 Tm (project content areas, and the notification/presence layer that keeps users connected while) Tj
+/F1 11 Tf
+1 0 0 1 50 535 Tm (they work.) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000253 00000 n 
+0000003943 00000 n 
+0000004069 00000 n 
+0000007623 00000 n 
+0000007749 00000 n 
+0000009044 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+9114
+%%EOF

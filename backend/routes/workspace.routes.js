@@ -10,6 +10,7 @@ import {
   listWorkspaces,
   removeMember,
   updateWorkspace,
+  upgradeWorkspace,
 } from '../controllers/workspace.controller.js';
 
 const router = Router();
@@ -18,6 +19,7 @@ router.post('/', createWorkspace);
 router.get('/', listWorkspaces);
 router.get('/:workspaceId', requireRole('viewer'), getWorkspace);
 router.put('/:workspaceId', requireRole('admin'), updateWorkspace);
+router.post('/:workspaceId/upgrade', requireRole('admin'), upgradeWorkspace);
 router.delete('/:workspaceId', requireRole('owner'), deleteWorkspace);
 router.get('/:workspaceId/members', requireRole('viewer'), listMembers);
 router.put('/:workspaceId/members/:userId/role', requireRole('admin'), changeMemberRole);
